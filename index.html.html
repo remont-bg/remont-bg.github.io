@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>remont-bg – Ремонт и поддръжка на дома</title>
+
+    <style>
+        :root {
+            --bg: #f1eee8;
+            --surface: #fffdf9;
+            --surface-soft-strong: #e4d8c8;
+            --text: #26302d;
+            --muted: #66706c;
+            --border: rgba(38, 48, 45, 0.12);
+            --header-bg: #202a27;
+            --header-text: #f7f3eb;
+            --shadow: rgba(38, 48, 45, 0.14);
+            --button-text: #26302d;
+            --button-bg: #dce5df;
+            --button-bg-hover: #cbd8cf;
+            --service-button-text: #26302d;
+            --service-button-bg: #d7ad72;
+            --service-button-bg-hover: #c99858;
+            --accent: #b1844b;
+            --accent-soft: #d7bd96;
+        }
+
+        html[data-theme="dark"] {
+            --bg: #151b19;
+            --surface: #202a27;
+            --surface-soft-strong: #34403b;
+            --text: #f1eee8;
+            --muted: #b8c0bb;
+            --border: rgba(241, 238, 232, 0.12);
+            --header-bg: #101613;
+            --header-text: #f7f3eb;
+            --shadow: rgba(0, 0, 0, 0.34);
+            --button-text: #f1eee8;
+            --button-bg: #2f3d37;
+            --button-bg-hover: #3d4d45;
+            --service-button-text: #26302d;
+            --service-button-bg: #d1aa70;
+            --service-button-bg-hover: #e0bc86;
+            --accent: #d1aa70;
+            --accent-soft: #a98451;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            transition: background 0.25s ease, color 0.25s ease;
+        }
+
+        h1,
+        h2,
+        .logo {
+            font-family: inherit;
+            letter-spacing: 0;
+        }
+
+        header {
+            background: var(--header-bg);
+            color: var(--header-text);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 18px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        nav a {
+            color: var(--header-text);
+            text-decoration: none;
+            margin-left: 24px;
+            font-size: 15px;
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-soft);
+        }
+
+        .theme-switcher {
+            position: fixed;
+            top: 14px;
+            right: 14px;
+            z-index: 1100;
+        }
+
+        .theme-button {
+            width: 32px;
+            height: 32px;
+            border: 2px solid var(--accent-soft);
+            background: var(--header-bg);
+            padding: 0;
+            border-radius: 50%;
+            font-size: 16px;
+            font-family: inherit;
+            line-height: 1;
+            cursor: pointer;
+            box-shadow: 0 0 0 2px rgba(177, 132, 75, 0.16), 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-icon {
+            font-size: 24px;
+            line-height: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+        }
+
+        .theme-sun {
+            color: #e7b85f;
+        }
+
+        .theme-moon {
+            color: #d9d2c4;
+            display: inline;
+            text-shadow: none;
+            -webkit-text-stroke: 0;
+        }
+
+        html[data-theme="dark"] .theme-sun {
+            display: inline;
+        }
+
+        html[data-theme="dark"] .theme-button {
+            background: var(--surface);
+            border-color: var(--accent-soft);
+        }
+
+        html[data-theme="dark"] .theme-moon {
+            display: none;
+        }
+
+        html:not([data-theme="dark"]) .theme-sun {
+            display: none;
+        }
+
+        .theme-button:hover {
+            transform: translateY(-1px) rotate(12deg) scale(1.06);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.16), 0 6px 14px rgba(0, 0, 0, 0.26);
+        }
+
+        .theme-button:active {
+            transform: translateY(0) rotate(0) scale(0.96);
+        }
+
+        .theme-button:focus-visible {
+            outline: 3px solid rgba(177, 132, 75, 0.45);
+            outline-offset: 3px;
+        }
+
+        .hero {
+            background: var(--surface);
+            text-align: center;
+            padding: 96px 20px 88px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero h1 {
+            font-size: clamp(34px, 5vw, 52px);
+            line-height: 1.12;
+            margin-bottom: 18px;
+            color: var(--text);
+        }
+
+        .hero p {
+            max-width: 640px;
+            margin: auto;
+            font-size: 18px;
+            color: var(--muted);
+        }
+
+        section {
+            max-width: 1100px;
+            margin: auto;
+            padding: 76px 20px;
+        }
+
+        section h2 {
+            text-align: center;
+            font-size: 34px;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            color: var(--text);
+        }
+
+        /* УСЛУГИ */
+
+        .services-intro {
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto 38px;
+            color: var(--muted);
+            font-size: 17px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 22px;
+            align-items: start;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            position: relative;
+            background: var(--surface);
+            border: none;
+            border-radius: 6px;
+            box-shadow: 0 8px 24px var(--shadow);
+            width: 100%;
+        }
+
+        .service-card:nth-child(1) {
+            order: 4;
+        }
+
+        .service-card:nth-child(2) {
+            order: 3;
+        }
+
+        .service-card:nth-child(3) {
+            order: 2;
+        }
+
+        .service-card:nth-child(4) {
+            order: 1;
+        }
+
+        .service-button {
+            position: relative;
+            width: 100%;
+            border: none;
+            background: var(--service-button-bg);
+            padding: 16px 17px;
+            text-align: center;
+            font-size: 15px;
+            font-family: inherit;
+            font-weight: 500;
+            color: var(--service-button-text);
+            cursor: pointer;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 58px;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.32) inset;
+            transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        }
+
+        .service-button:hover {
+            background: var(--service-button-bg-hover);
+            box-shadow: 0 3px 8px var(--shadow);
+        }
+
+        .service-card.active .service-button {
+            background: var(--header-bg);
+            color: var(--header-text);
+            box-shadow: inset 0 0 0 2px var(--accent), 0 3px 8px var(--shadow);
+            transform: translateY(1px);
+        }
+
+        html:not([data-theme="dark"]) .service-card.active .service-button {
+            background: var(--surface-soft-strong);
+            color: var(--text);
+            box-shadow: inset 0 0 0 2px var(--accent), 0 3px 8px var(--shadow);
+        }
+
+        .service-arrow {
+            position: absolute;
+            right: 16px;
+            font-size: 18px;
+            transition: transform 0.25s ease;
+        }
+
+        .service-card.active .service-arrow {
+            transform: rotate(180deg);
+        }
+
+        .service-content {
+            display: none;
+            position: static;
+            margin-top: 8px;
+            background: var(--surface);
+            border-radius: 6px;
+            padding: 18px 18px 16px 18px;
+            box-shadow: 0 14px 28px var(--shadow);
+            border: none;
+        }
+
+        .service-card.active .service-content {
+            display: block;
+        }
+
+        .service-description {
+            color: var(--muted);
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        .service-content ul {
+            padding-left: 20px;
+            color: var(--text);
+        }
+
+        .service-content li {
+            margin-bottom: 7px;
+            font-size: 15px;
+        }
+
+        /* ЗА МЕН */
+
+        .about {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            border-radius: 6px;
+            padding: 34px;
+            max-width: 850px;
+            margin: auto;
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .about p {
+            margin-bottom: 15px;
+        }
+
+        /* ЦЕНИ */
+
+        .prices {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            border-radius: 6px;
+            padding: 34px;
+            max-width: 850px;
+            margin: auto;
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .prices p {
+            margin-bottom: 12px;
+        }
+
+        /* КОНТАКТИ */
+
+        .contacts {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 36px;
+            max-width: 850px;
+            margin: auto;
+            text-align: center;
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .contacts p {
+            margin-bottom: 10px;
+        }
+
+        .contacts a {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .contacts a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px;
+            margin-top: 20px;
+        }
+
+        .contact-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            min-width: 180px;
+            padding: 16px 17px;
+            border: none;
+            border-radius: 5px;
+            background: var(--service-button-bg);
+            color: var(--service-button-text);
+            text-decoration: none;
+            font-size: 15px;
+            font-family: inherit;
+            font-weight: 500;
+            transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.32) inset;
+            line-height: 1.3;
+        }
+
+        .contact-button .label {
+            display: inline;
+            font-size: inherit;
+            letter-spacing: 0;
+            text-transform: none;
+            color: inherit;
+            margin-bottom: 0;
+            font-weight: inherit;
+        }
+
+        .contact-button:hover {
+            background: var(--service-button-bg-hover);
+            transform: translateY(-1px);
+            text-decoration: none;
+            box-shadow: 0 3px 8px var(--shadow);
+        }
+
+        .contacts .contact-button,
+        .contacts .contact-button:hover,
+        .contacts .contact-button:focus-visible {
+            text-decoration: none;
+        }
+
+        .contact-button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+            text-decoration: none;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: var(--header-bg);
+            color: var(--header-text);
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+            border-top: 1px solid var(--accent-soft);
+        }
+
+        /* ТАБЛЕТ */
+
+        @media (max-width: 800px) {
+
+            .hero h1 {
+                font-size: 32px;
+            }
+        }
+
+        /* МОБИЛЕН ТЕЛЕФОН */
+
+        @media (max-width: 600px) {
+
+            .header-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav a {
+                margin: 0 7px;
+                font-size: 14px;
+            }
+
+            .hero {
+                padding: 60px 20px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 17px;
+            }
+
+            section {
+                padding: 45px 15px;
+            }
+
+            section h2 {
+                font-size: 29px;
+            }
+
+            .about,
+            .prices,
+            .contacts {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="header-container">
+
+        <a class="logo" href="#nachalo" aria-label="Към началото на сайта">
+            remont-bg
+        </a>
+
+        <nav>
+            <a href="#uslugi">Услуги</a>
+            <a href="#za-men">За мен</a>
+            <a href="#ceni">Цени</a>
+            <a href="#kontakti">Контакти</a>
+        </nav>
+
+    </div>
+
+</header>
+
+<div class="theme-switcher" aria-label="Избор на визуален стил">
+    <button class="theme-button" type="button" data-theme-toggle aria-label="Превключване между светла и тъмна тема">
+        <span class="theme-icon theme-sun" aria-hidden="true">☀</span>
+        <span class="theme-icon theme-moon" aria-hidden="true">☾</span>
+    </button>
+</div>
+
+
+<!-- НАЧАЛО -->
+
+<div class="hero" id="nachalo">
+
+    <h1>Ремонт и поддръжка на дома</h1>
+
+</div>
+
+
+<!-- УСЛУГИ -->
+
+<section id="uslugi">
+
+    <h2>Услуги</h2>
+
+
+    <div class="services-grid">
+
+
+        <!-- 1. ЕЛЕКТРО -->
+
+        <div class="service-card">
+
+            <button class="service-button" type="button">
+
+                <span>Електро</span>
+
+                <span class="service-arrow">▼</span>
+
+            </button>
+
+            <div class="service-content">
+
+                <p class="service-description">
+                    Подмяна и монтаж на електрически елементи и уреди.
+                </p>
+
+                <ul>
+                    <li>Контакти и ключове</li>
+                    <li>Осветителни тела</li>
+                    <li>Дребни електрически ремонти</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <!-- 2. ВиК -->
+
+        <div class="service-card">
+
+            <button class="service-button" type="button">
+
+                <span>ВиК</span>
+
+                <span class="service-arrow">▼</span>
+
+            </button>
+
+            <div class="service-content">
+
+                <p class="service-description">
+                    Ремонти и подмяна на ВиК елементи.
+                </p>
+
+                <ul>
+                    <li><strong>Смесители</strong></li>
+                    <li><strong>Кранове</strong></li>
+                    <li><strong>Сифони</strong></li>
+                    <li><strong>Меки връзки</strong></li>
+                    <li><strong>Казанчета</strong></li>
+                    <li><strong>Мивки</strong></li>
+                    <li><strong>Душове</strong></li>
+                    <li><strong>Течове</strong></li>
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <!-- 3. СТРОИТЕЛНИ И ДОВЪРШИТЕЛНИ РАБОТИ -->
+
+        <div class="service-card">
+
+            <button class="service-button" type="button">
+
+                <span>Строителни и довършителни работи</span>
+
+                <span class="service-arrow">▼</span>
+
+            </button>
+
+            <div class="service-content">
+
+                <p class="service-description">
+                    Ремонт и обновяване на вътрешни повърхности и настилки.
+                </p>
+
+                <ul>
+                    <li><strong>Шпакловка</strong> — гипсова, циментова, полимерна, декоративна</li>
+                    <li><strong>Мазилка</strong> — циментова, минерална</li>
+                    <li><strong>Боядисване</strong> — валяк и четка</li>
+                    <li><strong>Ламинат</strong> — ремонт, подмяна и полагане</li>
+                    <li><strong>Лепене на плочки</strong> — фаянс и гранитогрес</li>
+                    <li><strong>Гипсокартон</strong> — монтаж и ремонт</li>
+                    <li><strong>Вагонна шарка</strong> — монтаж и ремонт</li>
+                    <li><strong>Саниране</strong> — полагане на топлоизолация и хидроизолация</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <!-- 4. РЕМОНТИ И РЕНОВИРАНЕ -->
+
+        <div class="service-card">
+
+            <button class="service-button" type="button">
+
+                <span>Ремонти и реновиране</span>
+
+                <span class="service-arrow">▼</span>
+
+            </button>
+
+            <div class="service-content">
+
+                <p class="service-description">
+                    Освежаване, ремонт и цялостно обновяване на помещения.
+                </p>
+
+                <ul>
+                    <li><strong>Освежаване</strong> — боядисване и привеждане на помещението в по-добър вид.</li>
+                    <li><strong>Частични ремонти</strong> — поправяне или подмяна на отделни части.</li>
+                    <li><strong>Монтажи</strong> — поставяне или подмяна на различни елементи.</li>
+                    <li><strong>Поддръжка</strong> — текущи дребни поправки и грижа за жилището.</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- ЗА МЕН -->
+
+<section id="za-men">
+
+    <h2>За мен</h2>
+
+    <div class="about">
+
+        <p>
+            Извършвам ремонти, монтажи, поддръжка
+            и обновяване на дома.
+        </p>
+
+        <p>
+            Работя внимателно и организирано, с фокус върху
+            качеството и практичния резултат.
+        </p>
+
+        <p>
+            Преди започване уточняваме дейностите, материалите
+            и ориентировъчната цена.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ЦЕНИ -->
+
+<section id="ceni">
+
+    <h2>Цени</h2>
+
+    <div class="prices">
+
+        <p>
+            Цената зависи от вида и обема на работата.
+        </p>
+
+        <p>
+            При малки ремонти се уточнява конкретна цена.
+        </p>
+
+        <p>
+            При по-големи ремонти се прави предварителна оценка.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- КОНТАКТИ -->
+
+<section id="kontakti">
+
+    <h2>Контакти</h2>
+
+    <div class="contacts">
+
+        <div class="contact-buttons">
+            <a class="contact-button" href="tel:+359888123456">
+                <span class="label">Телефон:</span>
+                0888 123 456
+            </a>
+
+            <a class="contact-button" href="viber://chat?number=%2B359888123456">
+                <span class="label">Viber:</span>
+                0888 123 456
+            </a>
+
+            <a class="contact-button" href="mailto:remont-bg@abv.bg">
+                <span class="label">Email:</span>
+                remont-bg@abv.bg
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    © 2026 <a href="https://remont-bg.github.io/">https://remont-bg.github.io/</a>
+
+</footer>
+
+
+<script>
+
+    const serviceButtons =
+        document.querySelectorAll(".service-button");
+
+    serviceButtons.forEach(function(button) {
+
+        button.addEventListener("click", function() {
+
+            const card =
+                this.closest(".service-card");
+
+            const shouldOpen = !card.classList.contains("active");
+
+            document.querySelectorAll(".service-card.active").forEach(function(openCard) {
+                openCard.classList.remove("active");
+            });
+
+            if (shouldOpen) {
+                card.classList.add("active");
+            }
+
+        });
+
+    });
+
+    const themeButton = document.querySelector("[data-theme-toggle]");
+
+    function applyTheme(themeName) {
+        document.documentElement.setAttribute("data-theme", themeName);
+
+        if (themeName === "dark") {
+            themeButton.setAttribute("aria-label", "Превключи към светла тема");
+        } else {
+            themeButton.setAttribute("aria-label", "Превключи към тъмна тема");
+        }
+
+        localStorage.setItem("site-theme", themeName);
+    }
+
+    const savedTheme = localStorage.getItem("site-theme") || "light";
+    applyTheme(savedTheme);
+
+    themeButton.addEventListener("click", function() {
+        const currentTheme = document.documentElement.getAttribute("data-theme") || "light";
+        const nextTheme = currentTheme === "dark" ? "light" : "dark";
+        applyTheme(nextTheme);
+    });
+
+</script>
+
+</body>
+</html>
