@@ -447,6 +447,32 @@
             margin-top: 20px;
         }
 
+        .site-qr {
+            margin: 30px auto 0;
+            max-width: 280px;
+        }
+
+        .site-qr a {
+            display: inline-block;
+            padding: 12px;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            box-shadow: 0 8px 20px var(--shadow);
+        }
+
+        .site-qr img {
+            display: block;
+            width: min(100%, 240px);
+            height: auto;
+        }
+
+        .site-qr p {
+            margin: 12px 0 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
         .contact-button {
             display: inline-flex;
             align-items: center;
@@ -824,6 +850,13 @@
                 <span class="label">Email:</span>
                 remont-bg@abv.bg
             </a>
+        </div>
+
+        <div class="site-qr">
+            <a href="qr-code.png" target="_blank" rel="noopener">
+                <img src="qr-code.png" alt="QR код за сайта remont-bg">
+            </a>
+            <p>Сканирайте QR кода, за да отворите сайта.</p>
         </div>
 
     </div>
