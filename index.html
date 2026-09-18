@@ -44,16 +44,12 @@
         :root {
             --bg: #f3f5f4;
             --surface: #ffffff;
-            --surface-soft-strong: #dfe7e8;
             --text: #202a2e;
             --muted: #667378;
             --border: rgba(32, 42, 46, 0.12);
             --header-bg: #202a2e;
             --header-text: #f2f5f3;
             --shadow: rgba(32, 42, 46, 0.14);
-            --button-text: #202a2e;
-            --button-bg: #e0e8e9;
-            --button-bg-hover: #ccdadd;
             --service-button-text: #ffffff;
             --service-button-bg: #286b78;
             --service-button-bg-hover: #1d525d;
@@ -64,16 +60,12 @@
         html[data-theme="dark"] {
             --bg: #121a1d;
             --surface: #1d292d;
-            --surface-soft-strong: #2d3d41;
             --text: #f2f5f3;
             --muted: #b7c3c5;
             --border: rgba(242, 245, 243, 0.12);
             --header-bg: #0d1417;
             --header-text: #f2f5f3;
             --shadow: rgba(0, 0, 0, 0.34);
-            --button-text: #f2f5f3;
-            --button-bg: #293a3f;
-            --button-bg-hover: #385057;
             --service-button-text: #ffffff;
             --service-button-bg: #55a7b3;
             --service-button-bg-hover: #76c1c8;
@@ -108,7 +100,7 @@
 
         header {
             background: var(--header-bg);
-            color: var(--header-text);
+            color: var(--service-button-text);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -222,7 +214,7 @@
         .hero {
             background: var(--surface);
             text-align: center;
-            padding: 96px 20px 88px;
+            padding: 70px 20px 64px;
             border-bottom: 1px solid var(--border);
         }
 
@@ -364,7 +356,7 @@
         }
 
         .service-description {
-            color: var(--muted);
+            color: var(--text);
             margin-bottom: 15px;
             font-size: 15px;
         }
@@ -384,7 +376,7 @@
         .about {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-left: 4px solid var(--accent);
+            border-left: 4px solid var(--service-button-bg);
             border-radius: 6px;
             padding: 34px;
             max-width: 850px;
@@ -401,7 +393,7 @@
         .prices {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-left: 4px solid var(--accent);
+            border-left: 4px solid var(--service-button-bg);
             border-radius: 6px;
             padding: 34px;
             max-width: 850px;
@@ -568,7 +560,7 @@
             }
 
             .hero {
-                padding: 60px 20px;
+                padding: 45px 20px;
             }
 
             .hero h1 {
@@ -608,6 +600,7 @@
 
         <nav>
             <a href="#uslugi">Услуги</a>
+            <a href="#remonti">Ремонти</a>
             <a href="#za-men">За мен</a>
             <a href="#ceni">Цени</a>
             <a href="#kontakti">Контакти</a>
@@ -630,8 +623,6 @@
 <div class="hero" id="nachalo">
 
     <h1>Ремонт и поддръжка на дома</h1>
-
-    <p>ВиК, електро, боядисване, шпакловка, плочки, ламинат и дребни ремонти с предварително уточнени дейности и цена.</p>
 
 </div>
 
@@ -690,18 +681,17 @@
             <div class="service-content">
 
                 <p class="service-description">
-                    Ремонти и подмяна на ВиК елементи.
+                    Подмяна на ВиК елементи.
                 </p>
 
                 <ul>
-                    <li><strong>Смесители</strong></li>
-                    <li><strong>Кранове</strong></li>
-                    <li><strong>Сифони</strong></li>
-                    <li><strong>Меки връзки</strong></li>
-                    <li><strong>Казанчета</strong></li>
-                    <li><strong>Мивки</strong></li>
-                    <li><strong>Душове</strong></li>
-                    <li><strong>Течове</strong></li>
+                    <li>Смесители</li>
+                    <li>Кранове</li>
+                    <li>Сифони</li>
+                    <li>Меки връзки</li>
+                    <li>Казанчета</li>
+                    <li>Мивки</li>
+                    <li>Душове</li>
                 </ul>
 
             </div>
@@ -724,18 +714,22 @@
             <div class="service-content">
 
                 <p class="service-description">
-                    Ремонт и обновяване на вътрешни повърхности и настилки.
+                    Ремонт и обновяване на вътрешни и външни повърхности, настилки и помещения.
                 </p>
 
                 <ul>
-                    <li><strong>Шпакловка</strong> — гипсова, циментова, полимерна, декоративна</li>
-                    <li><strong>Мазилка</strong> — циментова, минерална</li>
-                    <li><strong>Боядисване</strong> — валяк и четка</li>
-                    <li><strong>Ламинат</strong> — ремонт, подмяна и полагане</li>
-                    <li><strong>Лепене на плочки</strong> — фаянс и гранитогрес</li>
-                    <li><strong>Гипсокартон</strong> — монтаж и ремонт</li>
-                    <li><strong>Вагонна шарка</strong> — монтаж и ремонт</li>
-                    <li><strong>Саниране</strong> — полагане на топлоизолация и хидроизолация</li>
+                    <li><strong>Мазилка</strong> — циментова и минерална.</li>
+                    <li><strong>Шпакловка</strong> — гипсова, циментова, полимерна и декоративна.</li>
+                    <li><strong>Боядисване</strong> — с валяк и четка.</li>
+                    <li><strong>Гипсокартон</strong> — монтаж и ремонт.</li>
+                    <li><strong>Замазки</strong> — подови замазки и изравняване.</li>
+                    <li><strong>Плочки</strong> — фаянс и гранитогрес.</li>
+                    <li><strong>Ламинат</strong> — полагане и подмяна.</li>
+                    <li><strong>Вагонна шарка</strong> — монтаж.</li>
+                    <li><strong>Первази</strong> — монтаж и подмяна.</li>
+                    <li><strong>Вътрешни декоративни корнизи</strong> — монтаж на корнизи за пердета и завеси на тавани и стени.</li>
+                    <li><strong>Фугиране и силикониране</strong> — за бани, кухни и други помещения.</li>
+                    <li><strong>Саниране</strong> — топлоизолация и хидроизолация.</li>
                 </ul>
 
             </div>
@@ -743,13 +737,13 @@
         </div>
 
 
-        <!-- 4. РЕМОНТИ И РЕНОВИРАНЕ -->
+        <!-- 4. РЕМОНТИ И ОБНОВЯВАНЕ -->
 
-        <div class="service-card">
+        <div class="service-card" id="remonti">
 
             <button class="service-button" type="button">
 
-                <span>Ремонти и реновиране</span>
+                <span>Ремонти и обновяване</span>
 
                 <span class="service-arrow">▼</span>
 
@@ -758,14 +752,14 @@
             <div class="service-content">
 
                 <p class="service-description">
-                    Освежаване, ремонт и цялостно обновяване на помещения.
+                    Ремонти, монтажи и поддръжка на дома — от малки поправки до цялостно обновяване на помещения.
                 </p>
 
                 <ul>
-                    <li><strong>Освежаване</strong> — боядисване и привеждане на помещението в по-добър вид.</li>
-                    <li><strong>Частични ремонти</strong> — поправяне или подмяна на отделни части.</li>
-                    <li><strong>Монтажи</strong> — поставяне или подмяна на различни елементи.</li>
-                    <li><strong>Поддръжка</strong> — текущи дребни поправки и грижа за жилището.</li>
+                    <li><strong>Освежаване</strong> — боядисване и подобряване на вида на помещението.</li>
+                    <li><strong>Ремонти</strong> — поправяне и подмяна на повредени части и повърхности в дома.</li>
+                    <li><strong>Монтажи</strong> — поставяне и подмяна на различни елементи.</li>
+                    <li><strong>Поддръжка</strong> — текущи поправки и грижа за дома.</li>
                 </ul>
 
             </div>
@@ -851,7 +845,7 @@
             </a>
 
             <a class="contact-button" href="mailto:remont-bg@abv.bg">
-                <span class="label">Email:</span>
+                <span class="label">Имейл:</span>
                 remont-bg@abv.bg
             </a>
         </div>
@@ -884,6 +878,8 @@
 
     serviceButtons.forEach(function(button) {
 
+        button.setAttribute("aria-expanded", "false");
+
         button.addEventListener("click", function() {
 
             const card =
@@ -893,10 +889,12 @@
 
             document.querySelectorAll(".service-card.active").forEach(function(openCard) {
                 openCard.classList.remove("active");
+                openCard.querySelector(".service-button").setAttribute("aria-expanded", "false");
             });
 
             if (shouldOpen) {
                 card.classList.add("active");
+                this.setAttribute("aria-expanded", "true");
             }
 
         });
