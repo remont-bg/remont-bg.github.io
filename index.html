@@ -522,6 +522,45 @@
             text-decoration: none;
         }
 
+        .scroll-top {
+            position: fixed;
+            right: 20px;
+            bottom: 22px;
+            width: 48px;
+            height: 48px;
+            border: 2px solid #d0a85d;
+            border-radius: 50%;
+            background: #203b39;
+            color: #f9f7f1;
+            font-size: 22px;
+            line-height: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(14px);
+            transition: opacity 0.25s ease, transform 0.25s ease, background 0.25s ease;
+            z-index: 1200;
+            cursor: pointer;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .scroll-top:hover {
+            background: #2f8f83;
+        }
+
+        .scroll-top:focus-visible {
+            outline: 3px solid rgba(177, 132, 75, 0.45);
+            outline-offset: 4px;
+        }
+
         /* FOOTER */
 
         footer {
@@ -725,7 +764,7 @@
                     <li><strong>Замазки</strong> — подови замазки и изравняване.</li>
                     <li><strong>Плочки</strong> — фаянс и гранитогрес.</li>
                     <li><strong>Ламинат</strong> — полагане и подмяна.</li>
-                    <li><strong>Вагонна шарка</strong> — монтаж.</li>
+                    <li><strong>Дървена ламперия (вагонка)</strong> — монтаж.</li>
                     <li><strong>Первази</strong> — монтаж и подмяна.</li>
                     <li><strong>Вътрешни декоративни корнизи</strong> — монтаж на корнизи за пердета и завеси на тавани и стени.</li>
                     <li><strong>Фугиране и силикониране</strong> — за бани, кухни и други помещения.</li>
@@ -786,8 +825,7 @@
         </p>
 
         <p>
-            Работя внимателно и организирано, с внимание
-            към качеството и практичния резултат.
+            Работя внимателно и организирано, с внимание към качеството.
         </p>
 
         <p>
@@ -870,6 +908,7 @@
 
 </footer>
 
+<button class="scroll-top" type="button" aria-label="Към началото" title="Към началото">↑</button>
 
 <script>
 
@@ -922,6 +961,23 @@
         const currentTheme = document.documentElement.getAttribute("data-theme") || "light";
         const nextTheme = currentTheme === "dark" ? "light" : "dark";
         applyTheme(nextTheme);
+    });
+
+    const scrollTopButton = document.querySelector(".scroll-top");
+
+    function toggleScrollTopButton() {
+        if (window.scrollY > 400) {
+            scrollTopButton.classList.add("visible");
+        } else {
+            scrollTopButton.classList.remove("visible");
+        }
+    }
+
+    toggleScrollTopButton();
+    window.addEventListener("scroll", toggleScrollTopButton);
+
+    scrollTopButton.addEventListener("click", function() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
 </script>
