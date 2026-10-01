@@ -265,15 +265,6 @@
             margin: 0 auto;
         }
 
-        .service-card {
-            position: relative;
-            background: var(--surface);
-            border: none;
-            border-radius: 6px;
-            box-shadow: 0 8px 24px var(--shadow);
-            width: 100%;
-        }
-
         .service-card:nth-child(1) {
             order: 4;
         }
@@ -288,6 +279,15 @@
 
         .service-card:nth-child(4) {
             order: 1;
+        }
+
+        .service-card {
+            position: relative;
+            background: var(--surface);
+            border: none;
+            border-radius: 6px;
+            box-shadow: 0 8px 24px var(--shadow);
+            width: 100%;
         }
 
         .service-button {
@@ -309,6 +309,13 @@
             min-height: 58px;
             box-shadow: 0 1px 0 rgba(255, 255, 255, 0.32) inset;
             transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+            text-align: left;
+        }
+
+        .service-button > span:first-child {
+            flex: 1;
+            text-align: left;
+            line-height: 1.35;
         }
 
         .service-button:hover {
@@ -592,14 +599,36 @@
 
         @media (max-width: 600px) {
 
+            section,
+            #remonti {
+                scroll-margin-top: 108px;
+            }
+
             .header-container {
-                flex-direction: column;
-                gap: 10px;
+                padding: 12px 14px 14px;
+            }
+
+            nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 6px 10px;
+                width: 100%;
             }
 
             nav a {
-                margin: 0 7px;
-                font-size: 14px;
+                margin: 0;
+                font-size: 13px;
+            }
+
+            .theme-switcher {
+                top: 10px;
+                right: 10px;
+            }
+
+            .header-container {
+                flex-direction: column;
+                gap: 10px;
             }
 
             .hero {
@@ -626,6 +655,17 @@
             .prices,
             .contacts {
                 padding: 25px 20px;
+            }
+
+            .service-button {
+                justify-content: space-between;
+                gap: 12px;
+                min-height: 52px;
+                padding: 13px 14px;
+            }
+
+            .service-arrow {
+                right: 12px;
             }
         }
     </style>
